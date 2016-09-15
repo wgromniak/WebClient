@@ -1,3 +1,10 @@
+Usage:
+
+1. Clone the repo,
+2. Copy `src/app/whitelist.js.example` to `src/app/whitelist.js` and fill it in.
+3. `npm install`,
+4. `npm start`.
+
 ProtonMail Web Client
 =======
 

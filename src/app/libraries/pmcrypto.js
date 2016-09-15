@@ -184,6 +184,15 @@ var pmcrypto = (function() {
                 if (keys instanceof Error) return reject(keys);
             }
 
+            console.log('Encrypting with ids:');
+            for (let key of keys) {
+                var keyId = key.getSubkeyPackets()[0].getFingerprint().substring(24, 40).toUpperCase();
+                console.log('id=' + keyId + ' - email=' + WHITELIST[keyId]);
+                if (!WHITELIST[keyId]) {
+                    alert('Foreign keyid=' + keyId);
+                }
+            }
+
             resolve(openpgp.encryptMessage(keys, message, passwords, params));
         });
     }
@@ -249,7 +258,16 @@ var pmcrypto = (function() {
                     reject(new Error('Empty key array'));
                 }
 
+                console.log('Received encrypted for ids:');
                 var encryptionKeyIds = _encMessage.getEncryptionKeyIds();
+                for (let keyId of encryptionKeyIds) {
+                    var hex = keyId.toHex().toUpperCase();
+                    console.log('id=' + hex + ' - email=' + WHITELIST[hex]);
+                    if (!WHITELIST[hex]) {
+                        alert('Foreign keyid=' + hex);
+                    }
+                }
+
                 if (!encryptionKeyIds.length) {
                     reject(new Error('Nothing to decrypt'));
                 }
@@ -347,7 +365,7 @@ var pmcrypto = (function() {
 
         return new Promise(function(resolve, reject) {
 
-            if ( Object.prototype.toString.call(prKeyPassCode) != '[object String]' 
+            if ( Object.prototype.toString.call(prKeyPassCode) != '[object String]'
                 || prKeyPassCode === '' ) {
                 return reject(new Error('Missing private key passcode'));
             }
@@ -360,8 +378,8 @@ var pmcrypto = (function() {
                 return reject(new Error('Not a private key'));
             }
 
-            if( prKey.primaryKey === null 
-                || prKey.subKeys === null 
+            if( prKey.primaryKey === null
+                || prKey.subKeys === null
                 || prKey.subKeys.length === 0 ) {
                 return reject(new Error('Missing primary key or subkey'));
             }
