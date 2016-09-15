@@ -1,5 +1,5 @@
 
-// long key id to email (or whatever identifier you want to have)
+// long key id (16 chars, uppercase hex) to email (or whatever identifier you want to have)
 var WHITELIST = {
     '1234567890ABCDEF': 'larch@protonmail.com',
 };
