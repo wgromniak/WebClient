@@ -5,6 +5,8 @@ Usage:
 3. `npm install`,
 4. `npm start`.
 
+It will log key ids and identifiers you encrypt/decrypt to the console and `alert` if an unknown key id is encountered. 
+
 ProtonMail Web Client
 =======
 
