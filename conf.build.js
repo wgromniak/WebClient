@@ -91,7 +91,7 @@ module.exports = {
   }),
 
   proton_build: {
-    version: "3.6.1",
+    version: "3.6.12",
     notes: "http://protonmail.dev/blog/",
     date: "17 Apr. 2015"
   }
